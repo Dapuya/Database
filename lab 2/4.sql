@@ -1,4 +1,4 @@
--- 2
+-- 4
 create table customers(
     id int not null ,
     full_name varchar(50) not null,
