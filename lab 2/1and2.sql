@@ -16,41 +16,44 @@ create table customers(
     );
 
 select * from customers;
+drop table customers;
 
 create table orders(
     code int not null ,
-    customer_id int,
+    customer_id int not null ,
     total_sum double precision check ( total_sum > 0) not null ,
     is_paid boolean not null ,
     primary key (code),
     foreign key (customer_id) references customers
 );
 
--- drop table orders;
+drop table orders;
 
 select * from orders;
 
 create table products(
-    id varchar,
+    id varchar not null ,
     name varchar unique not null ,
     description text,
     price double precision not null check ( price > 0 ),
     primary key (id)
+
 );
--- drop table products CASCADE ;
+drop table products CASCADE ;
 select * from products;
 
 create table order_items(
     order_code int not null ,
-    product_id varchar not null ,
+    product_id int not null ,
     quantity int not null check ( quantity > 0 ),
+    primary key (order_code, product_id),
     foreign key (order_code) references orders,
     foreign key (product_id) references products
 );
 
 
 select * from order_items;
--- drop table order_items;
+drop table order_items;
 
 
 

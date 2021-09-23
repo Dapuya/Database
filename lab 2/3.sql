@@ -10,7 +10,7 @@ create table students(
     additional_info text,
     primary key (full_name)
 );
-drop table students;
+drop table students cascade ;
 select * from students;
 
 create table instructor(
@@ -22,7 +22,7 @@ create table instructor(
 );
 
 select * from instructor;
-
+drop table instructor cascade ;
 create table lesson_participants(
     lesson_title varchar,
     instructor_name varchar,
