@@ -15,9 +15,9 @@ select * from students;
 
 create table instructor(
     full_name varchar not null ,
-    lang_s varchar,
-    work_experience float,
-    remote_lessons boolean,
+    lang_s varchar not null ,
+    work_experience float not null ,
+    remote_lessons boolean not null ,
     primary key (full_name)
 );
 
@@ -25,9 +25,9 @@ select * from instructor;
 drop table instructor cascade ;
 create table lesson_participants(
     lesson_title varchar,
+    room_number int,
     instructor_name varchar,
     student_name varchar,
-    room_number int,
     primary key (lesson_title, room_number),
     foreign key (instructor_name) references instructor,
     foreign key (student_name) references students
