@@ -1,4 +1,5 @@
--- 3
+--3
+
 create table students(
     full_name varchar not null ,
     age int not null ,
@@ -36,4 +37,3 @@ create table lesson_participants(
 select * from lesson_participants;
 
 drop table lesson_participants;
-

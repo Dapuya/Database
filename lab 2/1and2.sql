@@ -1,12 +1,3 @@
--- 1
--- * Data-definition language used to specify schemas, define data structures.
--- For instance: create table, alter table, drop table.
--- *Data-manipulation language used to express database queries and updates, manipulate data itself.
--- For example: insert, update, delete, select.
-
-
-
--- 2
 create table customers(
     id int not null ,
     full_name varchar(50) not null,
@@ -44,7 +35,7 @@ select * from products;
 
 create table order_items(
     order_code int not null ,
-    product_id int not null ,
+    product_id varchar not null ,
     quantity int not null check ( quantity > 0 ),
     primary key (order_code, product_id),
     foreign key (order_code) references orders,
@@ -54,6 +45,4 @@ create table order_items(
 
 select * from order_items;
 drop table order_items;
-
-
 
