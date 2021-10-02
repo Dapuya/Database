@@ -14,7 +14,8 @@ select course_id from section where semester = 'Fall';
 select id, name from student where tot_cred > 45 and tot_cred < 90;
 
 --f
-select name from student where substring(name, length(name),1) in ('a','e','u','o','i');
+select name from student where substring(name, length(name),1) in ('a','e','u','o','i','y');
 
 --g
 select course_id from prereq where prereq_id = 'CS-101';
+
