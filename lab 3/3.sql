@@ -24,3 +24,4 @@ where instructor.id = teaches.id and takes.course_id = teaches.course_id and  ta
 select distinct time_slot.time_slot_id, title from section, course, time_slot
 where end_hr < 13 and section.course_id = course.course_id and section.time_slot_id = time_slot.time_slot_id
 order by title;
+

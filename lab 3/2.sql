@@ -3,28 +3,21 @@ select dept_name, avg(salary)::numeric(10) as avg_salary from instructor
  group by dept_name order by avg_salary asc;
 
 --b
-select building
-from section
-group by building
-having count(*) =
-       (select max(c)
-       from
-            (select count(course_id) as c
-            from section
-            group by building) as alias
-           );
+select building as number
+from department,course
+where department.dept_name=course.dept_name
+group by department.building
+order by count(course_id) desc limit 1;
 
 --c
-select dept_name
-from course
-group by dept_name
-having count(*) =
-       (select min(c)
-       from(
-           select count(course_id) as c
-           from course
-           group by dept_name) as alias
-           );
+select course.dept_name as number
+from department,course
+where department.dept_name=course.dept_name
+group by course.dept_name
+having count(course_id)<=all(
+    select count(course_id) as number from department,course
+    where department.dept_name=course.dept_name
+    group by course.dept_name);
 
 
 --d
