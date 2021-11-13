@@ -68,7 +68,7 @@ $$
     declare bal int;
     declare lim int;
     begin
-        savepoint s1;
+--         savepoint s1;
         update accounts
         set balance = balance - 400
         where account_id = 'RS88012';
@@ -82,7 +82,7 @@ $$
             update transactions set status = 'rollback' where id = 3;
         else
             commit;
-        update transactions set status = 'commited' where id = 3;
+            update transactions set status = 'commited' where id = 3;
         end if;
     end;
 $$
