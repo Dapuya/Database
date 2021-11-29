@@ -1,66 +1,40 @@
 
-create table Type(
-    ID numeric  ,
-    Name varchar(8) ,
+
+create table Brands(
+    ID numeric not null ,
+    Name varchar(10) not null,
     primary key (ID, Name)
 );
+
+insert into Brands values (1, 'Danone');
+insert into Brands values (2, '');
+insert into Brands values (3, 'Danone');
+insert into Brands values (4, 'Danone');
+insert into Brands values (5, 'Danone');
+
 
 
 create table Products(
     UPC_code varchar(8) ,
     Name varchar(10) ,
     Price int,
-    Type_ID numeric not null ,
-    Type_Name varchar(8) not null ,
+    Brand_ID numeric not null ,
+    Brand_Name varchar(10) not null ,
     Size varchar(8) not null,
     primary key (UPC_code, Name, Price),
-    foreign key (Type_ID, Type_Name) references Type(ID, Name)
+    foreign key (Brand_ID,Brand_Name) references Brands(ID, Name)
 );
 
-create table Brands(
-    ID numeric not null ,
-    Name varchar(10) not null,
+create table Type(
+    ID numeric  ,
+    Name varchar(8) ,
     UPC_code varchar(8) not null ,
-    Product_Name varchar(10) not null ,
+    Product_name varchar(10) not null ,
     Price int not null ,
     primary key (ID, Name),
     foreign key (UPC_code, Product_name, Price) references Products(UPC_code, Name, Price)
 );
 
-create table Food(
-    ID numeric primary key ,
-    UPC_code varchar(8) not null ,
-    Product_name varchar(10) not null ,
-    Price int not null ,
-    Type_ID int not null ,
-    Type_Name varchar(8) not null ,
-    foreign key (UPC_code, Product_name, Price) references Products(UPC_code, Name, Price),
-    foreign key (Type_ID, Type_Name) references Type(ID, Name)
-);
-
-
-create table Drinks(
-    ID numeric primary key ,
-    UPC_code varchar(8) not null ,
-    Product_name varchar(10) not null ,
-    Price int not null ,
-    Type_ID int not null ,
-    Type_Name varchar(8) not null ,
-    foreign key (UPC_code, Product_name, Price) references Products(UPC_code, Name, Price),
-    foreign key (Type_ID, Type_Name) references Type(ID, Name)
-);
-
-
-create table Cleaners(
-    ID numeric primary key ,
-    UPC_code varchar(8) not null ,
-    Product_name varchar(10) not null ,
-    Price int not null ,
-    Type_ID int not null ,
-    Type_Name varchar(8) not null ,
-    foreign key (UPC_code, Product_name, Price) references Products(UPC_code, Name, Price),
-    foreign key (Type_ID, Type_Name) references Type(ID, Name)
-);
 
 create table Vendors(
     ID numeric primary key ,
@@ -162,10 +136,10 @@ create table Online_customers(
 
 
 
-drop table Online;
-drop table Products;
-
-drop table Online_customers;
-drop table vendors cascade;
-drop table brands;
-drop table stores;
+-- drop table Online;
+-- drop table Products;
+--
+-- drop table Online_customers;
+-- drop table vendors cascade;
+-- drop table brands;
+-- drop table stores;
