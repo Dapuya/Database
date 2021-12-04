@@ -57,40 +57,34 @@ insert into store values (3, 'Trio', 'Baitursynov 85', '09:00-23:00');
 insert into store values (4, 'Duo', 'Dostyk 43', '08:00-22:00');
 
 
+insert into store_orders values (3, 'Trio',  1, 3, 'Mars', '01030004', 'Snickers',280, '200g', 20);
+insert into store_orders values (1, 'Maxi',  2, 1, 'Danone', '01020001', 'Activia-vanilla', 160, '125g', 20);
+insert into store_orders values (2, 'Smart',  3, 4, 'P&G', '02010002', 'Fairy', 700, '0,7l', 10);
+insert into store_orders values (3, 'Trio',  5, 2, 'PepsiCo', '01010002', '7Up', 200, '0,5l', 10);
+insert into store_orders values (4, 'Duo',  4, 7, 'Unilever', '01010005', 'Lipton', 170, '0,5l', 15 );
+insert into store_orders values (1, 'Maxi',  6, 5, 'CocaCola', '01010004', 'Sprite', 240, '0,5l', 20 );
+insert into store_orders values (4, 'Duo',  4, 6, 'Nestle', '01030001','KitKat', 200, '160g', 25);
 
 
-insert into store_orders values (3, 'Trio', 'Baitursynov 85', 1, 3, 'Mars', '01030004', 'Snickers',280, '200g', 20);
-insert into store_orders values (1, 'Maxi', 'Abay 1', 2, 1, 'Danone', '01020001', 'Activia-vanilla', 160, '125g', 20);
-insert into store_orders values (2, 'Smart', 'Satbayev 23', 3, 4, 'P&G', '02010002', 'Fairy', 700, '0,7l', 10);
-insert into store_orders values (3, 'Trio', 'Baitursynov 85', 5, 2, 'PepsiCo', '01010002', '7Up', 200, '0,5l', 10);
-insert into store_orders values (4, 'Duo', 'Dostyk 43', 4, 7, 'Unilever', '01010005', 'Lipton', 170, '0,5l', 15 );
-insert into store_orders values (1, 'Maxi', 'Abay 1', 6, 5, 'CocaCola', '01010004', 'Sprite', 240, '0,5l', 20 );
-insert into store_orders values (4, 'Duo', 'Dostyk 43', 4, 6, 'Nestle', '01030001','KitKat', 200, '160g', 25);
+insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values ( 1,  'Maxi','01020001', 'Activia-vanilla', 160, '125g', 10);
+insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values (2,  'Smart','01010002', '7Up', 200, '0,5l', 10);
+insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values ( 3, 'Trio','01030004', 'Snickers',280, '200g', 15);
+insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values ( 2,'Smart','01030001','KitKat', 200, '160g', 20);
+insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values ( 4, 'Duo','01010005', 'Lipton', 170, '0,5l', 20);
 
 
-insert into list_of_products values (1, '01010001', 'Pepsi', 250, '0,5l', 10, '000001');
-insert into list_of_products values (1,'02010003', 'Cif', 720, '0,7l', 10, '000002');
-insert into list_of_products values (2, '02010002', 'Fairy', 700, '0,7l', 15, '000003');
-insert into list_of_products values (3, '01030004', 'Snickers', 280, '200g', 20, '000004');
-insert into list_of_products values (3, '01030001', 'KitKat', 200, '160g', 20, '000005');
 
+insert into cash values (2, '000001', 2000, now());
+insert into cash (orders_id, receipt_number, sum, date)
+values (5, '000002', 3400, now());
 
-insert into orders values (1, '000001', 2500, date);
-insert into orders values (1, '000002', 7200, date);
-insert into orders values (2, '000003', 10500, date);
-insert into orders values (3, '000004', 5600, date);
-insert into orders values (3, '000005', 4000, date);
+insert into online values (1, '1234567887654321', '000001', 1600, now());
+insert into online values (3, '8765432112345678', '000002', 4200, now());
+insert into online values (4, '7890123456782345', '000003', 4000, now());
 
-insert into cash values (2, '000003', 10500, date );
-
-
-insert into online values (1, '1234567887654321', '000001', 9700);
-insert into online values (3, '8765432112345678', '', 9600);
-
-
-insert into Online_customers values (1, '1234567887654321', 'John', 'Snow', 'Tole Bi 28', '8-777-12-34-567');
-insert into Online_customers values (3, '8765432112345678', 'Jenny', 'Smith', 'Kabanbai 39', '8-702-53-65-227');
-
+insert into Online_customers values (1, '1234567887654321', 1600,'John', 'Snow', 'Tole Bi 28', '8-777-12-34-567');
+insert into Online_customers values (3, '8765432112345678', 4200,'Jenny', 'Smith', 'Kabanbai 39', '8-702-53-65-227');
+insert into online_customers values (4, '7890123456782345', 4000, 'Dan', 'Justin', 'Qurmangazy 97', '7-771-22-33-444');
 
 
 
@@ -100,3 +94,9 @@ select * from products;
 select * from address;
 select * from phone;
 select * from store;
+select * from store_orders;
+select * from order_items;
+select * from orders;
+select * from cash;
+select * from online;
+select * from online_customers;

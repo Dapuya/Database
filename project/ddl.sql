@@ -53,13 +53,12 @@ create table Store(
     Name varchar(20)  ,
     Address varchar(20),
     working_hours varchar not null ,
-    primary key (ID, Name, Address)
+    primary key (ID, Name)
 );
 
 create table Store_Orders(
-    ID numeric,
+    ID int  ,
     Name varchar(20) ,
-    Address varchar(20),
     Vendor_ID numeric not null ,
     Brand_ID numeric not null ,
     Brand_Name varchar(20),
@@ -68,77 +67,98 @@ create table Store_Orders(
     Price int,
     Size varchar(8) not null,
     amount numeric not null ,
-    foreign key (ID, Name, Address) references Store(ID, Name, Address),
+    primary key (UPC_code, Product_Name, Price, Size),
+    foreign key (ID, Name) references Store(ID, Name),
     foreign key (Brand_ID, Brand_Name) references Brands(ID, Name) ,
     foreign key (UPC_code, Product_Name, Price, Size) references Products(UPC_code, Name, Price, Size)
 );
 
-create table List_of_Products(
-    ID numeric ,
-    UPC_code varchar(8) not null ,
-    Name varchar(8) not null ,
+
+
+create table Order_items(
+    ID int generated always as identity ,
+    Store_ID int,
+    Store_Name varchar(20),
+    UPC_code varchar(50) not null ,
+    Name varchar(50) not null ,
     Price int not null ,
-    Size varchar(8) not null,
-    Amount numeric not null ,
-    Reciept_number varchar(6) not null ,
-    primary key (ID, Reciept_number),
-    foreign key (UPC_code, Name, Price,Size) references Products(UPC_code, Name, Price,Size)
-);
-
-
-create table Final_Order(
-    ID numeric not null ,
-    Reciept_number varchar(6) not null ,
-
+    Size varchar(50) not null,
+    Amount int not null ,
+    primary key (ID),
+    foreign key ( UPC_code, Name, Price,Size) references Store_Orders( UPC_code, Product_Name, Price,Size),
+    foreign key (Store_ID, Store_Name) references Store(ID, Name)
 );
 
 
 create table Orders(
-    ID numeric not null ,
-    Reciept_number varchar(6)  not null ,
-
-    Date date not null ,
-    primary key (ID, Reciept_number),
-    foreign key (ID, Reciept_number) references List_of_Products(ID, Reciept_number)
+    ID_for_Orders int,
+    Summa int ,
+    Dates timestamp not null,
+    primary key (ID_for_Orders, summa),
+    foreign key (ID_for_Orders) references Order_items(ID)
 );
 
+create function for_orders()
+returns trigger
+language plpgsql
+as $$
+    declare summa int;
+    begin
+        Summa = (select price*Amount from Order_items where ID = new.id);
+        insert into Orders values (new.ID, Summa, now());
+        return new;
+    end;
+    $$;
+
+
+create trigger orders
+after insert
+    on Order_items
+    for each row
+    execute procedure for_orders();
+
+
 create table Cash(
-    ID numeric not null ,
+    Orders_ID int not null ,
     Receipt_number varchar(6) not null,
-    Sum numeric not null ,
-    Date date not null  ,
-    foreign key (ID, Receipt_number) references Orders(ID,Reciept_number)
+    Sum int not null,
+    Date timestamp not null ,
+    primary key (Orders_ID,Receipt_number, sum),
+    foreign key (Orders_ID, sum) references Orders(ID_for_Orders, summa)
 );
 
 create table Online(
-    ID numeric  ,
+    Order_ID int  ,
     Bank_account varchar(16)  ,
     Receipt_number varchar(6) not null ,
-    Sum numeric not null ,
-    Status varchar(8) not null ,
-    Date date not null  ,
-    primary key (ID, Bank_account),
-    foreign key (ID, Receipt_number) references Orders(ID, Reciept_number)
+    Sum int not null ,
+    Date timestamp not null  ,
+    primary key (Order_ID, Bank_account, Sum),
+    foreign key (Order_ID, Sum) references Orders(ID_for_Orders, summa)
 );
 
 create table Online_customers(
-    ID numeric primary key ,
+    ID int primary key ,
     Bank_account varchar(16) not null ,
-    First_Name varchar(8) not null,
-    Last_Name varchar(8) not null ,
-    Address varchar(10) not null ,
+    sum int not null ,
+    First_Name varchar(30) not null,
+    Last_Name varchar(30) not null ,
+    Address varchar(30) not null ,
     Phone varchar(15) not null,
-    foreign key (ID, Bank_account) references Online(ID, Bank_account)
+    foreign key (ID, Bank_account, Sum) references Online(Order_ID, Bank_account, sum)
 );
 
 
 
+drop table Orders;
+drop table order_items;
+drop function for_orders();
 
+drop table online_customers;
+drop table Online;
+drop table Cash;
 
--- drop table Online;
--- drop table Products;
---
 -- drop table Online_customers;
 -- drop table vendors cascade;
 -- drop table brands;
--- drop table stores;
+drop table store;
