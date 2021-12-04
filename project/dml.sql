@@ -71,6 +71,8 @@ insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amo
 insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values ( 3, 'Trio','01030004', 'Snickers',280, '200g', 15);
 insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values ( 2,'Smart','01030001','KitKat', 200, '160g', 20);
 insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values ( 4, 'Duo','01010005', 'Lipton', 170, '0,5l', 20);
+insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values ( 4, 'Duo','01010005', 'Lipton', 170, '0,5l', 20);
+insert into Order_items ( Store_ID, Store_Name, UPC_code, Name, Price, Size, amount) values ( 2,'Smart','01030001','KitKat', 200, '160g', 10);
 
 
 
