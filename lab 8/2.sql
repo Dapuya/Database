@@ -33,8 +33,8 @@ create trigger last_name_changes
     for each row
     execute procedure  trigger_function();
 
-insert into Student (First_Name, Last_Name)
-values ('John', 'Snow' );
+insert into Student (First_Name, Last_Name, date_of_birth)
+values ('John', 'Snow', '1990-12-3' );
 insert into Student (First_Name, Last_Name)
 values ('Lili', 'Rose' );
 insert into Student (First_Name, Last_Name)
@@ -70,7 +70,7 @@ create table ages(
 );
 
 insert into employee (first_name, last_name, date_of_birth)
-values ('George', 'Mike', '1999.10.22');
+values ('DSds', 'Mike', '1999.10.22');
 
 CREATE FUNCTION for_age()
    RETURNS TRIGGER

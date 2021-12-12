@@ -66,7 +66,7 @@ $$
     end;
     $$;
 
-select *from valid('s1sTfdfssf');
+select *from valid('ssfddghgtt');
 drop function valid;
 
 -- e
@@ -86,4 +86,3 @@ drop function outputs;
 
 
 drop function outputs;
-
